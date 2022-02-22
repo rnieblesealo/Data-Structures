@@ -47,6 +47,7 @@ void Insert(int value, int index){
     */
 
     Node* new_node = (Node*)malloc(sizeof(Node));
+    Node* current = HEAD;
 
     new_node->value = value;
     new_node->next = NULL;
@@ -57,7 +58,6 @@ void Insert(int value, int index){
         return;
     }
     
-    Node* current = HEAD;
     
     for (int i = 0; i < index--; ++i){
         current = current->next;
@@ -65,6 +65,32 @@ void Insert(int value, int index){
 
     new_node->next = current->next;
     current->next = new_node;
+}
+
+void Delete(int index){
+    // Deletes any given value from the linked list
+    // TODO Explain this (I figured it out on my own :D)
+    // IT WORKS BRO
+    // Clean up code tho :o
+
+    Node* to_delete;
+    Node* current = HEAD;
+
+    if (index == 0){
+        to_delete = HEAD;
+        HEAD = HEAD->next;
+        free(to_delete);
+    }
+
+    for (int i = 0; i < index--; ++i){
+        current = current->next;
+    }
+
+    to_delete = current->next;
+    current->next = to_delete->next;
+    free(to_delete);
+
+    // HEAD -> [FIRST] -> [N]
 }
 
 void Print(){
@@ -99,5 +125,8 @@ int main(){
 
     printf("Inserting 1000 at position 3!\n");
     Insert(1000, 3);
+    Print();
+    printf("Deleting position 2!\n");
+    Delete(0);
     Print();
 }
